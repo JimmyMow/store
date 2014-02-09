@@ -5,6 +5,11 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+
+    unless current_visitor
+      @visitor = Visitor.create!
+      session[:visitor] = @visitor.id
+    end
   end
 
   # GET /products/1
